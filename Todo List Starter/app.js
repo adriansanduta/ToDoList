@@ -6,25 +6,34 @@
         </li> */}
 
 const list = document.querySelector('.list');  
+const input = document.querySelector('.input');
 
-let todoList = [
-    {
-        id: 1,
-        task: 'Finish Frontend Simplified'
-    },
-    {
-        id: 2,
-        task: 'Finish Interview Questions'
-    },
-    {
-        id: 3,
-        task: 'Land $100k Job'
-    },
-];
+let todoList = [];
+let todoInputValue = '';
+let counter = 0;
+
+function onInputChange(event) {
+    todoInputValue = event.target.value;
+}
+
+function addTodo() {
+    if (!todoInputValue) {
+        return;
+    }
+
+    todoList.push({
+        id: counter++,
+        task: todoInputValue,
+    });
+    renderTodos();
+    input.value = '';
+    todoInputValue = '';
+}
 
 function deleteTodo(id) {
     todoList = 
-  todoList.filter((todo) => {return todo.id !== id});
+  todoList.filter((todo) => todo.id !== id);
+  renderTodos();
 }
 
 function renderTodos() {
